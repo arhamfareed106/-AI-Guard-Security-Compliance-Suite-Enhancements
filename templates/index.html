@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Guard - Security & Compliance</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>AI Guard: Security & Compliance Suite</h1>
+        <p>A toolkit for auditing, hardening, and testing your AI-powered applications.</p>
+    </header>
+    <main>
+        <section id="dashboard" class="module">
+            <h2>Dashboard Overview</h2>
+            <div class="dashboard-grid">
+                <div class="card">
+                    <h3>Audit Summary</h3>
+                    <p id="audit-summary-text">Run an audit to see results.</p>
+                </div>
+                <div class="card">
+                    <h3>Response Readiness</h3>
+                    <p><span id="readiness-score" class="score">0</span>%</p>
+                </div>
+                <div class="card">
+                    <h3>Security Test Status</h3>
+                    <p id="security-test-status">Not yet run.</p>
+                </div>
+            </div>
+            <button id="refresh-dashboard-btn">Refresh Dashboard</button>
+        </section>
+
+        <section id="audit-module" class="module">
+            <h2>1. Initial Assessment & Privacy Audit</h2>
+            <form id="audit-form">
+                <label for="data-flow-input">Describe your chatbot/API data flow (e.g., "Our chatbot collects user name and email to create an account and logs their IP address for security.")</label>
+                <textarea id="data-flow-input" rows="5" placeholder="Enter data flow description here..."></textarea>
+                <button type="submit">Analyze for Compliance Gaps</button>
+            </form>
+            <div id="audit-results" class="results-box" style="display:none;">
+                <h3>Analysis Results</h3>
+                <pre id="audit-json-results"></pre>
+                <div id="audit-downloads"></div>
+            </div>
+        </section>
+
+        <section id="hardening-module" class="module">
+            <h2>2. API & Endpoint Hardening Simulations</h2>
+            <div class="hardening-grid">
+                <div>
+                    <h4>Rate Limiting Test</h4>
+                    <button id="rate-limit-btn">Test Rate-Limited Endpoint</button>
+                    <p>Click 6 times quickly to trigger a 429 error.</p>
+                </div>
+                <div>
+                    <h4>2FA Verification</h4>
+                    <button id="setup-2fa-btn">1. Setup 2FA</button>
+                    <input type="text" id="2fa-token-input" placeholder="Enter 6-digit token">
+                    <button id="verify-2fa-btn">2. Verify Token</button>
+                </div>
+                <div>
+                    <h4>CAPTCHA Simulation</h4>
+                    <label>
+                        <input type="checkbox" id="captcha-checkbox"> I'm not a robot
+                    </label>
+                    <button id="submit-with-captcha-btn" disabled>Submit with CAPTCHA</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="security-testing-module" class="module">
+            <h2>3. AI Threat & Security Testing</h2>
+            <div class="button-group">
+                <button id="voice-clone-btn">Simulate AI Voice Cloning Attack</button>
+                <button id="prompt-injection-btn">Simulate Prompt Injection Attack</button>
+                <button id="data-poisoning-btn">Simulate Data Poisoning Attack</button>
+                <button id="model-extraction-btn">Simulate Model Extraction Attack</button>
+                <button id="stress-test-btn">Start Endpoint Stress Test</button>
+            </div>
+            
+            <div id="biometric-auth-test" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-color);">
+                <h4>Biometric Authentication Test</h4>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <div>
+                        <label for="voice-sample">Voice Sample (simulated):</label>
+                        <input type="text" id="voice-sample" placeholder="Simulated voice data">
+                    </div>
+                    <div>
+                        <label>
+                            <input type="checkbox" id="liveness-check"> Include Liveness Challenge Response
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <input type="checkbox" id="additional-factor"> Include Additional Authentication Factor
+                        </label>
+                    </div>
+                    <button id="test-biometric-auth-btn">Test Biometric Authentication</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="response-module" class="module">
+            <h2>4. Incident Response Framework</h2>
+            <div class="button-group">
+                <button id="generate-playbook-btn">Download AI Incident Playbook (MD)</button>
+            </div>
+            
+            <div class="incident-form" style="margin-top: 20px; padding: 15px; border: 1px solid var(--border-color); border-radius: 5px;">
+                <h3>Test Incident Response</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                    <div>
+                        <label for="incident-type">Incident Type:</label>
+                        <select id="incident-type" style="width: 100%; padding: 8px; margin-top: 5px;">
+                            <option value="prompt_injection">Prompt Injection</option>
+                            <option value="model_evasion">Model Evasion / Adversarial Input</option>
+                            <option value="data_poisoning">Data Poisoning</option>
+                            <option value="voice_cloning">Voice Cloning / Impersonation</option>
+                            <option value="model_extraction">Model Extraction</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="incident-severity">Severity:</label>
+                        <select id="incident-severity" style="width: 100%; padding: 8px; margin-top: 5px;">
+                            <option value="low">Low</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="high">High</option>
+                            <option value="critical">Critical</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label for="incident-description">Description (optional):</label>
+                    <textarea id="incident-description" style="width: 100%; padding: 8px; margin-top: 5px;" rows="2" placeholder="Brief description of the incident..."></textarea>
+                </div>
+                <button id="trigger-incident-btn" style="width: 100%;">Simulate Incident Response</button>
+            </div>
+            
+            <div class="results-box" style="margin-top: 15px;">
+                <pre id="incident-response-results">Results will appear here...</pre>
+            </div>
+        </section>
+
+        <section id="reporting-module" class="module">
+            <h2>5. Finalization & Reporting</h2>
+             <div class="button-group">
+                <button id="export-owasp-btn">Export API Security Checklist (MD)</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>AI Guard App &copy; 2025. Built by Gemini.</p>
+    </footer>
+
+    <div id="results-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3>Simulation Result</h3>
+            <pre id="modal-pre-content"></pre>
+        </div>
+    </div>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
